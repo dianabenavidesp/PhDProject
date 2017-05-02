@@ -1,0 +1,5 @@
+-s 0
+-t 2
+-f data/australian/australian2.txt
+-z data/australian/australian1.txt.model
+-y data/australian/australian2tr.txt.model

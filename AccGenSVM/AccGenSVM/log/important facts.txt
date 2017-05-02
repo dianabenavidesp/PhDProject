@@ -1,0 +1,142 @@
+Australian, constraining alpha values (upper bound):
+
+Baseline: 209 iterations, 85 SVs, accuracy of 83.6957% on an independent test set
+
+A-SVM: 1195 iterations on australian2, 63 SV + SV from previous hypothesis for a total of 206 SVs, accuracy of 84.058%
+
+AccGenSVM: 1
+
+
+CALTECH 256
+
+ACCGENSVM Class 251, sample 251-1 as actual task
+optimization finished, #iter = 466
+nu = 0.10490299003830528
+obj = -97.5419155733579, rho = 1.0
+nSV = 88, nBSV = 67
+Total nSV = 88
+
+
+
+
+
+COMMANDS
+
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_201.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_201.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_202.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_202.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_203.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_203.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_204.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_204.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_205.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_205.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_206.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_206.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_207.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_207.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_208.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_208.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_209.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_209.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_210.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_210.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_211.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_211.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_212.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_212.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_213.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_213.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_214.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_214.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_215.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_215.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_216.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_216.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_217.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_217.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_218.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_218.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_219.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_219.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_220.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_220.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_221.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_221.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_222.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_222.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_223.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_223.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_224.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_224.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_225.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_225.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_226.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_226.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_227.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_227.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_228.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_228.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_229.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_229.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_230.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_230.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_231.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_231.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_232.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_232.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_233.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_233.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_234.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_234.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_235.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_235.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_236.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_236.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_237.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_237.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_238.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_238.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_239.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_239.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_240.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_240.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_241.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_241.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_242.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_242.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_243.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_243.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_244.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_244.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_245.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_245.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_246.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_246.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_247.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_247.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_248.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_248.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_249.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_249.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_250.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_250.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_251.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_251.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_252.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_252.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_253.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_253.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_254.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_254.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_255.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_255.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_256.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_256.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_157.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_157.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_158.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_158.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_159.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_159.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_160.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_160.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_161.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_161.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_162.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_162.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_163.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_163.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_164.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_164.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_165.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_165.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_166.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_166.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_167.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_167.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_168.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_168.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_169.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_169.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_170.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_170.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_171.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_171.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_172.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_172.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_173.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_173.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_174.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_174.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_175.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_175.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_176.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_176.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_177.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_177.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_178.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_178.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_179.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_179.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_180.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_180.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_181.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_181.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_182.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_182.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_183.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_183.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_184.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_184.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_185.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_185.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_186.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_186.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_187.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_187.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_188.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_188.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_189.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_189.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_190.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_190.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_191.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_191.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_192.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_192.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_193.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_193.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_194.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_194.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_195.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_195.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_196.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_196.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_197.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_197.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_198.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_198.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_199.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_199.csv.model"
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/samplebase251_200.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251PCA/training/sample251_200.csv.model"
+
+
+
+svm-predict "C:/Users/dben652/workspace/HTL/data/caltech256/251/sampletest251_2.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251/transfer/sampletransfer251_144ACCGEN.csv.model" "C:/Users/dben652/workspace/HTL/data/caltech256/251/test/sampletest251_2usingACCGEN251_144.out"
+
+svm-predict "C:/Users/dben652/workspace/HTL/data/caltech256/251/sampletest251_144.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251/training/sample251_1.csv.model" "C:/Users/dben652/workspace/HTL/data/caltech256/251/test/sampletest251_144using251_1.out"
+svm-predict "C:/Users/dben652/workspace/HTL/data/caltech256/251/sampletest251_144.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251/training/sample251_2.csv.model" "C:/Users/dben652/workspace/HTL/data/caltech256/251/test/sampletest251_144using251_2.out"
+svm-predict "C:/Users/dben652/workspace/HTL/data/caltech256/251/sampletest251_144.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251/training/sample251_3.csv.model" "C:/Users/dben652/workspace/HTL/data/caltech256/251/test/sampletest251_144using251_3.out"
+svm-predict "C:/Users/dben652/workspace/HTL/data/caltech256/251/sampletest251_144.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251/training/sample251_4.csv.model" "C:/Users/dben652/workspace/HTL/data/caltech256/251/test/sampletest251_144using251_4.out"
+svm-predict "C:/Users/dben652/workspace/HTL/data/caltech256/251/sampletest251_144.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251/training/sample251_5.csv.model" "C:/Users/dben652/workspace/HTL/data/caltech256/251/test/sampletest251_144using251_5.out"
+svm-predict "C:/Users/dben652/workspace/HTL/data/caltech256/251/sampletest251_144.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251/training/sample251_6.csv.model" "C:/Users/dben652/workspace/HTL/data/caltech256/251/test/sampletest251_144using251_6.out"
+svm-predict "C:/Users/dben652/workspace/HTL/data/caltech256/251/sampletest251_144.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251/training/sample251_7.csv.model" "C:/Users/dben652/workspace/HTL/data/caltech256/251/test/sampletest251_144using251_7.out"
+svm-predict "C:/Users/dben652/workspace/HTL/data/caltech256/251/sampletest251_144.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251/training/sample251_8.csv.model" "C:/Users/dben652/workspace/HTL/data/caltech256/251/test/sampletest251_144using251_8.out"
+svm-predict "C:/Users/dben652/workspace/HTL/data/caltech256/251/sampletest251_144.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251/training/sample251_9.csv.model" "C:/Users/dben652/workspace/HTL/data/caltech256/251/test/sampletest251_144using251_9.out"
+svm-predict "C:/Users/dben652/workspace/HTL/data/caltech256/251/sampletest251_144.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251/training/sample251_10.csv.model" "C:/Users/dben652/workspace/HTL/data/caltech256/251/test/sampletest251_144using251_10.out"
+
+
+svm-train -s 0 -t 2 "C:/Users/dben652/workspace/HTL/data/caltech256/251/sampletransfer251_144.csv" "C:/Users/dben652/workspace/HTL/data/caltech256/251/transfer/sample251_144.csv.model"
