@@ -1,14 +1,13 @@
 AccGenSVM
 ================
 Diana Benavides-Prado, Yun Sing Koh, Patricia Riddle
-1 May 2017
 
 Overview
 ========
 
-AccGenSVM is a method for selectively transferring information from source hypotheses trained with an SVM. This software accompanies the paper described on "AccGenSVM: Selectively Transferring from Source Hypotheses", to be published as part of the proceedings of IJCAI2017.
+AccGenSVM is a method for selectively transferring information from source hypotheses trained with an SVM. This software accompanies the paper described on "AccGenSVM: Selectively Transferring from Previous Hypotheses", to be published as part of the proceedings of IJCAI2017.
 
-Our implementation is build on top of LibSVM (Chang and Lin, 2011), and uses available implementations for KL-divergence (Hausser and Strimmer, 2014) and FNN (Beygelzimer et al., 2013).
+Our implementation is built on top of LibSVM (Chang and Lin, 2011), and uses available implementations for KL-divergence (Hausser and Strimmer, 2014) and FNN (Beygelzimer et al., 2013).
 
 Software usage
 ==============
@@ -46,10 +45,10 @@ which are already used in LibSVM, plus the following ones for selective transfer
 | -y  | output (model) file name                                               |
 | -a  | output (log) file name                                                 |
 
-Software usage
-==============
+Executable and source code
+==========================
 
-Download the .jar executable file and run AccGenSVM with the appropriated parameters. If you want to obtain/use/modify the source code, download the AccGenSVM directory. If you want to obtain/use/modify the source code for data extraction, download the ExtractionScripts directory.
+Download the .jar executable file and run AccGenSVM with the appropriated parameters. If you want to obtain/use/modify the source code, download the AccGenSVM directory.
 
 References
 ==========
