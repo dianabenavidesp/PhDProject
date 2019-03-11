@@ -43,7 +43,7 @@ Executable and source code
 
 Download the .jar executable file for L3SVM (l3svm.jar) and AccGenSVM (accgensvm.jar). 
 
-First, run AccGenSVM with your selected parameters. Two files, names transfer_log.txt and transfer_log_final.txt will be generated as a result of transferring forward selectively, in the same directory where you run AccGenSVM. You will need transfer_log_final.txt for using L3SVM. 
+First, run AccGenSVM with your selected parameters. Two files, named transfer_log.txt and transfer_log_final.txt will be generated as a result of transferring forward selectively, in the same directory where you run AccGenSVM. You will need transfer_log_final.txt for using L3SVM. 
 
 Then run L3SVM.jar with your selected parameters. 
 
@@ -58,6 +58,5 @@ References
 
 \[Chang and Lin, 2011\] Chih-Chung Chang and Chih-Jen Lin. LIB-SVM: a library for support vector machines. ACM TIST, 2(3):27, 2011.
 
-\[Benavides-Prado, Koh, Riddle\] AccGenSVM: Selectively Transferring from Source Hypotheses. In IJCAI Proceedings, pp 1440-1446. Available at: https://www.ijcai.org/
-proceedings/2017/0199.pdf
+\[Benavides-Prado, Koh and Riddle, 2017\] AccGenSVM: Selectively Transferring from Source Hypotheses. In IJCAI Proceedings, pp 1440-1446. Available at: https://www.ijcai.org/proceedings/2017/0199.pdf
 
