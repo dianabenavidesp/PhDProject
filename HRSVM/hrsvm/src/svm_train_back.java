@@ -94,10 +94,10 @@ public class svm_train_back {
 		+"-v n : n-fold cross validation mode\n"
 		+"-q : quiet mode (no outputs)\n"
 		//new parameters
-		+"-S : source model to transfer from (can be multiple)"
-		+"-H : target points back (allows repetition)\n"
+		+"-S : source model to transfer from (can be multiple)\n"
+		+"-H : model to be refined \n"
 		+"-M : name of the refined model for storage\n"
-		+"-G : gamma invariant value"
+		+"-G : gamma invariant value\n"
 		+"-L : name of the transfer log file produced by AccGenSVM"
 		);
 		System.exit(1);
@@ -213,9 +213,6 @@ public class svm_train_back {
 			{
 				//param.svm_type = 0;
 				model = svm_back.svm_train(prob,param, null, initial_alpha, invariance_models, gamma_invariant, source_points_back, log_file_name);
-				
-				//if(previous_rho == 0)
-					//previous_rho = 1;
 				
 				if(model.r >= previous_rho)
 				{

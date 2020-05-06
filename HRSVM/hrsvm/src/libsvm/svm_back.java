@@ -488,8 +488,7 @@ class Solver_Back {
 		alpha_bounds = new double[l];
 		for(int i=0;i<l;i++)
 		{
-			//DBP2 The upper-bound depends both on C and gamma
-			//if(y[i] > 0) {alpha_bounds[i] = Cp - gamma_invariant;} else { alpha_bounds[i] = Cn - gamma_invariant;}
+			//DBP2 
 			if(y[i] > 0) {alpha_bounds[i] = Cp;} else { alpha_bounds[i] = Cn;}
 		}
 		
@@ -615,24 +614,17 @@ class Solver_Back {
 					gradient_invariant_i = (y[i] * gradient_invariant_i);
 					gradient_invariant_j = (y[j] * gradient_invariant_j);
 					
-					//if(source_points_back[i]) {
 					direction_i = (gradient_invariant_i) * gamma_invariant;
 					if(y[i] > 0)
 						G[i] += direction_i;
 					else
-						G[i] += direction_i;
-					//alpha_bounds[i] += 0.01;
-					//}
-					
+						G[i] += direction_i;				
 
-					//if(source_points_back[j]) {
 					direction_j = (gradient_invariant_j) * gamma_invariant;
 					if(y[j] > 0)
 						G[j] += direction_j;
 					else
 						G[j] += direction_j;
-					//alpha_bounds[j] +=  0.01;
-					//}
 					
 					history[i] = true;
 					history[j] = true;
@@ -657,7 +649,6 @@ class Solver_Back {
 					quad_coef = 1e-12;
 				//DBP2
 				double delta = (-G[i] - G[j]) / quad_coef;
-				//double delta = Math.max((-G[i]-G[j] + direction_i), (-G[i]-G[j] + direction_j))/quad_coef;
 				double diff = alpha[i] - alpha[j];
 				alpha[i] += delta;
 				alpha[j] += delta;
@@ -716,7 +707,6 @@ class Solver_Back {
 					quad_coef = 1e-12;
 				//DBP2
 				double delta = (G[i] - G[j]) / quad_coef;
-				//double delta = Math.max((G[i]-G[j] + direction_i), (G[i]-G[j] + direction_j))/quad_coef;
 				double sum = alpha[i] + alpha[j];
 				alpha[i] -= delta;
 				alpha[j] += delta;
