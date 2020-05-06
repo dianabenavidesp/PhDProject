@@ -54,7 +54,7 @@ If you want to obtain/use/modify the source code, download the hrsvm directory.
 
 The directory data_scripts contains the scripts to extract the samples used in the experiments.
 
-The directory other_methods_scripts contains the scripts used for the counterpart methods ELLA and CL.
+The directory other_methods_scripts contains the scripts used for the counterpart methods ELLA, CL and DEN.
 
 References
 ==========
