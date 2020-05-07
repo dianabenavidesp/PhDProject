@@ -1,9 +1,12 @@
+#provided examples from each fo the 100 classes are each stored separately into .csv files,
+#this function extracts train and test samples
+#those samples are assumed to be already scaled (e.g. on the range -1, 1)
 extract_samples_train <- function(num_concepts)
 {
   percent_training <- 0.1
-  setwd("C:/Users/nanar/Desktop/cifar-100/data")
+  setwd("/cifar-100/data")
   
-  #30 is the number of repetitions
+  #30 is the number of repetitions, which can be changed
   for(class in 0:(num_concepts-1))
   {
     class_data <- read.table(paste("cifar", class, "_train.csv", sep = ""))
@@ -22,21 +25,21 @@ extract_samples_train <- function(num_concepts)
 #compose binary classification tasks (balanced)
 extract_samples <- function(percent, rep)
 {
-  setwd(paste("C:/Users/nanar/Desktop/cifar-100/data/rep", rep, sep = ""))
+  setwd(paste("/cifar-100/data/rep", rep, sep = ""))
   training_files <- list.files(pattern = "*._training.csv")
   
-  setwd(paste("C:/Users/nanar/Desktop/cifar-100/data", sep = ""))
+  setwd(paste("/cifar-100/data", sep = ""))
   test_files <- list.files(pattern = "*._test.csv")
   
   #training, test and validation data
-  setwd(paste("C:/Users/nanar/Desktop/cifar-100/data/rep", rep, sep = ""))
+  setwd(paste("/cifar-100/data/rep", rep, sep = ""))
   training_data_all <- data.frame(stringsAsFactors = FALSE)
   for(i in 1:length(training_files))
   {
     training_data_all <- rbind(training_data_all, read.csv(training_files[i], header = FALSE))
   }
   
-  setwd(paste("C:/Users/nanar/Desktop/cifar-100/data", sep = ""))
+  setwd(paste("/cifar-100/data", sep = ""))
   test_data_all <- data.frame(stringsAsFactors = FALSE)
   for(i in 1:length(test_files))
   {
@@ -94,7 +97,7 @@ extract_samples <- function(percent, rep)
     examples_test <- obtain_libsvm_file(examples_test)
     
     #write files
-    setwd(paste("C:/Users/nanar/Desktop/cifar-100/sources/data/rep", rep, sep = ""))
+    setwd(paste("/cifar-100/sources/data/rep", rep, sep = ""))
     write.table(examples, file = paste(getwd(), "/", class, "_training.csv", sep = ""), row.names = FALSE, col.names = FALSE, quote = FALSE)
     write.table(examples_test, file = paste(getwd(), "/", class, "_test.csv", sep = ""), row.names = FALSE, col.names = FALSE, quote = FALSE)
     j <- j + 1
@@ -104,7 +107,7 @@ extract_samples <- function(percent, rep)
 #extract source, target and test levels
 exists_sample <- function(rep, concept, percent)
 {
-  setwd(paste("C:/Users/nanar/Desktop/cifar-100/data/rep",rep,sep = ""))
+  setwd(paste("/cifar-100/data/rep",rep,sep = ""))
   
   file.exists(paste("cifar", concept,"_training.csv",sep = ""))
 }
@@ -120,8 +123,8 @@ write_train_sources_commands <- function(number_concepts, percent, rep)
       #sources
       if(exists_sample(rep, concept, percent))
       {
-        data_dir <- ("C:/Users/nanar/Desktop/cifar-100/sources/data/")
-        sources_dir <- ("C:/Users/nanar/Desktop/cifar-100/sources/")
+        data_dir <- ("/cifar-100/sources/data/")
+        sources_dir <- ("/cifar-100/sources/")
         
         training_file <- paste(data_dir, "rep",rep, "/", "cifar", concept, "_training.csv", sep = "")
         model_file <- paste(sources_dir, "model/rep",rep, "/", "cifar", concept, "_training.csv.model", sep = "")
@@ -132,13 +135,15 @@ write_train_sources_commands <- function(number_concepts, percent, rep)
       }
     }
   
-  setwd("C:/Users/nanar/Desktop/cifar-100/sources/")
+  setwd("/cifar-100/sources/")
   write.table(training_commands, paste(getwd(), "/training_commands_all.txt", sep = ""), row.names = FALSE, col.names = FALSE, quote = FALSE)
 }
 
+#write commands for training with forward and then backward transfer (refinement)
+#these commands will be helpful for calling the .jar file
 train_forward_backward <- function(number_concepts, percent, rep)
 {
-  setwd("C:/Users/nanar/Desktop/cifar-100/sources")
+  setwd("/cifar-100/sources")
   
   n_features <- 3072
   features <- ""; for(i in 1:n_features){ if(i != n_features) { features <- paste(features, i, "_", sep = "") } else { features <- paste(features, i, sep = "") } }
@@ -148,9 +153,9 @@ train_forward_backward <- function(number_concepts, percent, rep)
   balance_factor_forward <- 1
   balance_factor_backward <- 1
   
-  data_dir <- (paste("C:/Users/nanar/Desktop/cifar-100/sources/data/rep", rep, sep = ""))
-  model_dir <- (paste("C:/Users/nanar/Desktop/cifar-100/sources/model/rep", rep, sep = ""))
-  test_dir <- (paste("C:/Users/nanar/Desktop/cifar-100/test/rep", rep, sep = ""))
+  data_dir <- (paste("/cifar-100/sources/data/rep", rep, sep = ""))
+  model_dir <- (paste("/cifar-100/sources/model/rep", rep, sep = ""))
+  test_dir <- (paste("/cifar-100/test/rep", rep, sep = ""))
   
   times <- floor(number_concepts / 2)
   
@@ -188,9 +193,10 @@ train_forward_backward <- function(number_concepts, percent, rep)
   predict_test_command(sources, model_dir, data_dir, test_dir, number_concepts, time, rep) 
 }
 
+#commands for copying files when no transfer forward has occurred (created copies of existing models not subject to refinement)
 write_copy_command <- function(model_dir, sources, target, number_concepts, time, rep)
 {
-  setwd("C:/Users/nanar/Desktop/cifar-100/sources")
+  setwd("/cifar-100/sources")
   
   for(i in 0:(number_concepts-1))
   {
@@ -209,9 +215,10 @@ write_copy_command <- function(model_dir, sources, target, number_concepts, time
   }
 }
 
+#delete files when no necessary
 write_delete_command <- function(model_dir, test_dir, target, number_concepts, time, rep)
 {
-  setwd("C:/Users/nanar/Desktop/cifar-100/sources")
+  setwd("/cifar-100/sources")
   
   for(i in 0:(number_concepts-1))
   {
@@ -242,12 +249,13 @@ write_delete_command <- function(model_dir, test_dir, target, number_concepts, t
   }
 }
 
-
+#command for transferring forward
+#this will use the .jar file at https://github.com/nanarosebp/PhDProject/tree/master/AccGenSVM
 write_transfer_forward_command <- function(current_dir, model_dir, target, sources, time, n_features, features, balance_factor_forward, rep)
 {
   params <- paste("-s 0 -t 2 -K 0.5 ", " -M 100 -N ", n_features, " -F ", features, " -D ", "\"", current_dir, "\"", " -S ", "\"", model_dir, "\"", " -f ", sep = "")
   #r_path <- "-Djava.library.path=/gpfs1m/apps/easybuild/RHEL6.3/westmere/software/R/3.4.0-gimkl-2017a/lib64/R/library/rJava/jri"
-  command <- paste("java -jar accgensvm_forward_cifar.jar ", params, "\"", target, "\"", sep = "")
+  command <- paste("java -jar accgensvm.jar ", params, "\"", target, "\"", sep = "")
   
   for(i in 1:length(sources))
   {
@@ -257,10 +265,12 @@ write_transfer_forward_command <- function(current_dir, model_dir, target, sourc
   target_replace <- gsub(".csv", "", target)  
   command <- paste(command, " -y ", "\"", target_replace, "_t", time, ".csv.model", "\"", " -a ", "\"", target_replace, "_t", time, ".txt", "\"", " &>/dev/null", sep = "")
   
-  setwd("C:/Users/nanar/Desktop/cifar-100/sources")
+  setwd("/cifar-100/sources")
   write.table(command, paste(getwd(), "/forwardbackward_commands_all_cifar_rep", rep, ".cmd", sep = ""), row.names = FALSE, col.names = FALSE, quote = FALSE, append = TRUE)
 }
 
+#writes single transfer backward command
+#this will use the .jar file at https://github.com/nanarosebp/PhDProject/tree/master/HRSVM
 write_transfer_backward_command <- function(model_dir, test_dir, target, sources, time, balance_factor_backward, rep)
 {
   models <- ""
@@ -271,9 +281,9 @@ write_transfer_backward_command <- function(model_dir, test_dir, target, sources
     test <- gsub("training", "test", source_replace)
     
     params <- paste("-s 1 -t 2 -G 0.01 -B ", balance_factor_backward, sep = "")
-    command <- paste("java -jar accgensvm_backward_cifar.jar ", params, " -H ", "\"", model_dir, "/", target, "\"", " ", " -S ", "\"", model_dir, "/", source, "\"", " -M ", "\"", model_dir, "/", source_replace, "_t", time, ".csv.model", "\"", " > ", "\"", model_dir, "/", source_replace, "_t", time, ".txt", "\"", " &>/dev/null", sep = "")
+    command <- paste("java -jar hrsvm.jar ", params, " -H ", "\"", model_dir, "/", target, "\"", " ", " -S ", "\"", model_dir, "/", source, "\"", " -M ", "\"", model_dir, "/", source_replace, "_t", time, ".csv.model", "\"", " > ", "\"", model_dir, "/", source_replace, "_t", time, ".txt", "\"", " &>/dev/null", sep = "")
     
-    setwd("C:/Users/nanar/Desktop/cifar-100/sources")
+    setwd("/cifar-100/sources")
     write.table(command, paste(getwd(), "/forwardbackward_commands_all_cifar_rep", rep, ".cmd", sep = ""), row.names = FALSE, col.names = FALSE, quote = FALSE, append = TRUE)
     
     model_name <- paste(source_replace, "_t", time, ".csv.model", sep = "")
@@ -291,6 +301,7 @@ write_transfer_backward_command <- function(model_dir, test_dir, target, sources
   models
 }
 
+#write a predict command to obtain performance right after each timestep of the sequence, so that later this can be evaluated
 predict_test_command <- function(sources, model_dir, data_dir, test_dir, number_concepts, time, rep)
 {
   predict_commands <- data.frame(command = character(), stringsAsFactors = FALSE)
@@ -320,22 +331,11 @@ predict_test_command <- function(sources, model_dir, data_dir, test_dir, number_
     }
   }
   
-  setwd("C:/Users/nanar/Desktop/cifar-100/sources")
+  setwd("/cifar-100/sources")
   write.table(predict_commands, paste(getwd(), "/forwardbackward_commands_all_cifar_rep", rep, ".cmd", sep = ""), row.names = FALSE, col.names = FALSE, quote = FALSE, append = TRUE)
 }
 
-
-replace_commands_remote <- function(rep)
-{  
-  setwd("C:/Users/nanar/Desktop/cifar-100/sources/")
-  commands <- readLines(paste(getwd(), "/forwardbackward_commands_all_cifar_rep", rep, ".cmd", sep = ""))
-  output.file <- file(paste(getwd(), "/forwardbackward_commands_all_cifar_rep", rep, ".cmd", sep = ""), "wb")
-  
-  commands <- gsub("\"C:/Users/nanar/Dropbox/PhD/DIANA/Experiments/AccGenSVM\\(2\\)/data/", "\"/gpfs1m/projects/uoa00440/", commands)
-  write.table(commands, file = output.file, row.names = FALSE, col.names = FALSE, quote = FALSE, append = FALSE)
-  close(output.file)
-}
-
+#transform to libsvm file
 obtain_libsvm_file <- function(data)
 {
   n_cols <- ncol(data)

@@ -1,4 +1,4 @@
-#SYNTHETIC EXAMPLE: HYPERPLANE
+#convert file to libsvm-readable format
 obtain_libsvm_file <- function(data)
 {
   n_cols <- ncol(data)
@@ -15,9 +15,10 @@ obtain_libsvm_file <- function(data)
   data
 }
 
+#read hyperplanes generated with python library at: https://scikit-learn.org/stable/auto_examples/svm/plot_separating_hyperplane.html
 read_hyperplanes_python <- function()
 {
-  setwd("C:/Users/Administrator/Desktop/synthetic_hyperplane/data")
+  setwd("/synthetic_hyperplane/data")
   
   for(i in 1:1000)
   {
@@ -28,11 +29,11 @@ read_hyperplanes_python <- function()
   }
 }
 
-
+#extract source, target and test levels
 extract_samples_train_validation_test <- function(num_concepts, rep)
 {
   percent_training <- 0.1
-  setwd("C:/Users/Administrator/Desktop/synthetic_hyperplane/data")
+  setwd("/synthetic_hyperplane/data")
   
   #30 is the number of repetitions
   for(class in 1:num_concepts)
@@ -52,6 +53,7 @@ extract_samples_train_validation_test <- function(num_concepts, rep)
   }
 }
 
+#helper function
 extract_sample_train_test_one <- function(class_data, percent_training)
 {
   #training sample
@@ -71,6 +73,7 @@ extract_sample_train_test_one <- function(class_data, percent_training)
   list(training_sample, test_sample, validation_sample)
 }
 
+#add noise to make problems harder
 add_noise <- function(training, noise)
 {
   indexes_noise_positive <- sample(1:nrow(training), nrow(training) * noise, replace = FALSE)
@@ -79,14 +82,15 @@ add_noise <- function(training, noise)
 }
 
 
-#extract source, target and test levels
+#helper function
 exists_sample <- function(rep, concept, percent)
 {
-  setwd(paste("C:/Users/Administrator/Desktop/synthetic_hyperplane/data/rep",rep,sep = ""))
+  setwd(paste("/synthetic_hyperplane/data/rep",rep,sep = ""))
   
   file.exists(paste("hyperplane", concept,"_training.csv",sep = ""))
 }
 
+#training commands
 write_train_sources_commands <- function(number_concepts, percent, rep)
 {
   training_commands <- data.frame(command = character(), stringsAsFactors = FALSE)
@@ -98,8 +102,8 @@ write_train_sources_commands <- function(number_concepts, percent, rep)
         #sources
         if(exists_sample(rep, concept, percent))
         {
-          data_dir <- ("C:/Users/Administrator/Desktop/synthetic_hyperplane/data/")
-          sources_dir <- ("C:/Users/Administrator/Desktop/synthetic_hyperplane/sources/")
+          data_dir <- ("/synthetic_hyperplane/data/")
+          sources_dir <- ("/synthetic_hyperplane/sources/")
           
           training_file <- paste(data_dir, "rep",rep, "/", "hyperplane", concept, "_training.csv", sep = "")
           model_file <- paste(sources_dir, "model/rep",rep, "/", "hyperplane", concept, "_training.csv.model", sep = "")
@@ -110,13 +114,15 @@ write_train_sources_commands <- function(number_concepts, percent, rep)
         }
   }
   
-  setwd("C:/Users/Administrator/Desktop/synthetic_hyperplane/sources/")
+  setwd("/synthetic_hyperplane/sources/")
   write.table(training_commands, paste(getwd(), "/training_commands_all.cmd", sep = ""), row.names = FALSE, col.names = FALSE, quote = FALSE)
 }
 
+#write commands for training with forward and then backward transfer (refinement)
+#these commands will be helpful for calling the .jar file
 train_forward_backward <- function(number_concepts, percent, rep)
 {
-  setwd("C:/Users/Administrator/Desktop/synthetic_hyperplane/sources")
+  setwd("/synthetic_hyperplane/sources")
   
   n_features <- 10
   features <- ""; for(i in 1:n_features){ if(i != n_features) { features <- paste(features, i, "_", sep = "") } else { features <- paste(features, i, sep = "") } }
@@ -126,9 +132,9 @@ train_forward_backward <- function(number_concepts, percent, rep)
       balance_factor_forward <- 1
       balance_factor_backward <- 1
       
-      data_dir <- (paste("C:/Users/Administrator/Desktop/synthetic_hyperplane/data/rep", rep, sep = ""))
-      model_dir <- (paste("C:/Users/Administrator/Desktop/synthetic_hyperplane/sources/model/rep", rep, sep = ""))
-      test_dir <- (paste("C:/Users/Administrator/Desktop/synthetic_hyperplane/test/rep", rep, sep = ""))
+      data_dir <- (paste("/synthetic_hyperplane/data/rep", rep, sep = ""))
+      model_dir <- (paste("/synthetic_hyperplane/sources/model/rep", rep, sep = ""))
+      test_dir <- (paste("/synthetic_hyperplane/test/rep", rep, sep = ""))
       
       times <- floor(number_concepts / 2)
       
@@ -167,9 +173,10 @@ train_forward_backward <- function(number_concepts, percent, rep)
       predict_test_command(sources, model_dir, data_dir, test_dir, number_concepts, time, rep) 
 }
 
+#commands for copying files when no transfer forward has occurred (created copies of existing models not subject to refinement)
 write_copy_command <- function(model_dir, sources, target, number_concepts, time, rep)
 {
-  setwd("C:/Users/Administrator/Desktop/synthetic_hyperplane/sources")
+  setwd("/synthetic_hyperplane/sources")
   
   for(i in 1:number_concepts)
   {
@@ -188,9 +195,10 @@ write_copy_command <- function(model_dir, sources, target, number_concepts, time
   }
 }
 
+#for deleting unnecessary files, if required
 write_delete_command <- function(model_dir, test_dir, target, number_concepts, time, rep)
 {
-  setwd("C:/Users/Administrator/Desktop/synthetic_hyperplane/sources")
+  setwd("/synthetic_hyperplane/sources")
   
   for(i in 1:number_concepts)
   {
@@ -219,12 +227,14 @@ write_delete_command <- function(model_dir, test_dir, target, number_concepts, t
   }
 }
 
+#command for transferring forward
+#this will use the .jar file at https://github.com/nanarosebp/PhDProject/tree/master/AccGenSVM
 write_transfer_forward_command <- function(current_dir, model_dir, target, sources, time, n_features, features, balance_factor_forward, rep)
 {
   params <- paste("-s 0 -t 0 -K 0.30 -M 500 -N ", n_features, " -F ", features, " -D ", "\"", current_dir, "\"", " -S ", "\"", model_dir, "\"", " -f ", sep = "")
   #r_path <- "-Djava.library.path=/gpfs1m/apps/easybuild/RHEL6.3/sandybridge/software/R/3.5.0-gimkl-2017a/lib64/R/library/rJava/jri"
   r_path <- ""
-  command <- paste("java ", r_path, " -jar accgensvm_forward_hyperplane.jar ", params, "\"", target, "\"", sep = "")
+  command <- paste("java ", r_path, " -jar accgensvm.jar ", params, "\"", target, "\"", sep = "")
 
   target_replace <- gsub(".csv", "", target)  
   command <- paste(command, " -y ", "\"", target_replace, "_t", time, ".csv.model", "\"", " -a ", "\"", target_replace, "_t", time, ".txt", "\"", "", sep = "")
@@ -234,10 +244,12 @@ write_transfer_forward_command <- function(current_dir, model_dir, target, sourc
     command <- paste(command, " -H ", "\"", sources[i], "\"", sep = "")
   }
   
-  setwd("C:/Users/Administrator/Desktop/synthetic_hyperplane/sources")
+  setwd("/synthetic_hyperplane/sources")
   write.table(command, paste(getwd(), "/forwardbackward_commands_all_hyperplane_rep", rep, ".cmd", sep = ""), row.names = FALSE, col.names = FALSE, quote = FALSE, append = TRUE)
 }
 
+#writes single transfer backward command
+#this will use the .jar file at https://github.com/nanarosebp/PhDProject/tree/master/HRSVM
 write_transfer_backward_command <- function(model_dir, test_dir, target, sources, time, balance_factor_backward, rep)
 {
   models <- ""
@@ -248,9 +260,9 @@ write_transfer_backward_command <- function(model_dir, test_dir, target, sources
     test <- gsub("training", "test", source_replace)
     
     params <- paste("-s 1 -t 0 -G 0.001 -B ", balance_factor_backward, sep = "")
-    command <- paste("java -jar accgensvm_backward_hyperplane.jar ", params, " -H ", "\"", model_dir, "/", target, "\"", " -S ", "\"", model_dir, "/", source, "\"", " -M ", "\"", model_dir, "/", source_replace, "_t", time, ".csv.model", "\"", " > ", "\"", model_dir, "/", source_replace, "_t", time, ".txt", "\"", sep = "")
+    command <- paste("java -jar hrsvm.jar ", params, " -H ", "\"", model_dir, "/", target, "\"", " -S ", "\"", model_dir, "/", source, "\"", " -M ", "\"", model_dir, "/", source_replace, "_t", time, ".csv.model", "\"", " > ", "\"", model_dir, "/", source_replace, "_t", time, ".txt", "\"", sep = "")
     
-    setwd("C:/Users/Administrator/Desktop/synthetic_hyperplane/sources")
+    setwd("/synthetic_hyperplane/sources")
     write.table(command, paste(getwd(), "/forwardbackward_commands_all_hyperplane_rep", rep, ".cmd", sep = ""), row.names = FALSE, col.names = FALSE, quote = FALSE, append = TRUE)
     
     model_name <- paste(source_replace, "_t", time, ".csv.model", sep = "")
@@ -268,6 +280,7 @@ write_transfer_backward_command <- function(model_dir, test_dir, target, sources
   models
 }
 
+#write a predict command to obtain performance right after each timestep of the sequence, so that later this can be evaluated
 predict_test_command <- function(sources, model_dir, data_dir, test_dir, number_concepts, time, rep)
 {
   predict_commands <- data.frame(command = character(), stringsAsFactors = FALSE)
@@ -297,6 +310,6 @@ predict_test_command <- function(sources, model_dir, data_dir, test_dir, number_
       }
     }
   
-  setwd("C:/Users/Administrator/Desktop/synthetic_hyperplane/sources")
+  setwd("/synthetic_hyperplane/sources")
   write.table(predict_commands, paste(getwd(), "/forwardbackward_commands_all_hyperplane_rep", rep, ".cmd", sep = ""), row.names = FALSE, col.names = FALSE, quote = FALSE, append = TRUE)
 }

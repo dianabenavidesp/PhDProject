@@ -1,13 +1,17 @@
+#read a particular class
 read_class_file <- function(class)
 {
-  setwd("C:/Users/Administrator/Desktop/imagenet/data")
+  setwd("/imagenet/data")
   class <- read.csv(paste(class, sep = ""), sep = " ", header = FALSE)
   class
 }
 
+#provided examples from each fo the 20 classes are each stored separately into .csv files,
+#this function extracts train and test samples
+#those samples are assumed to be already scaled (e.g. on the range -1, 1)
 extract_samples_train_validation_test <- function(percent_training, percent_test, percent_validation)
 {
-  setwd("C:/Users/Administrator/Desktop/imagenet/data")
+  setwd("/imagenet/data")
   classes <- list.files(pattern = "*.mat.csv")
   
   #30 is the number of repetitions
@@ -30,7 +34,7 @@ extract_samples_train_validation_test <- function(percent_training, percent_test
       #just 300 examples
       if(length(test) > 300){ test <- test[1:300] }
       
-      setwd("C:/Users/Administrator/Desktop/imagenet/data")    
+      setwd("/imagenet/data")    
       write.table(training, file = paste(getwd(), "/rep", rep, "/", gsub(".sbow.mat.csv", "", classes[j]), "_training.csv", sep = ""), sep = "\t", row.names = FALSE, col.names = FALSE, quote = FALSE)
       write.table(test, file = paste(getwd(), "/rep", rep, "/", gsub(".sbow.mat.csv", "", classes[j]), "_test.csv", sep = ""), sep = "\t", row.names = FALSE, col.names = FALSE, quote = FALSE)
       gc()
@@ -38,7 +42,7 @@ extract_samples_train_validation_test <- function(percent_training, percent_test
   }
 }
 
-
+#extract one by one
 extract_sample_train_test_one <- function(class_data, percent_training, percent_test, percent_validation)
 {
   #training sample
@@ -59,10 +63,10 @@ extract_sample_train_test_one <- function(class_data, percent_training, percent_
 }
 
 
-#2) CREATE BINARY SAMPLES AT THE SOURCE, TRANSFER AND TEST LEVEL
+#create binary samples at the source, target and test levels
 extract_samples <- function(percent, rep)
 {
-  setwd(paste("C:/Users/Administrator/Desktop/imagenet/data/rep", rep, sep = ""))
+  setwd(paste("/imagenet/data/rep", rep, sep = ""))
   training_files <- list.files(pattern = "*._training.csv")
   test_files <- list.files(pattern = "*._test.csv")
   
@@ -129,13 +133,14 @@ extract_samples <- function(percent, rep)
     examples_test <- obtain_libsvm_file(examples_test)
     
     #write files
-    setwd(paste("C:/Users/Administrator/Desktop/imagenet/sources/data/rep", rep, sep = ""))
+    setwd(paste("/imagenet/sources/data/rep", rep, sep = ""))
     write.table(examples, file = paste(getwd(), "/", class, "_training.csv", sep = ""), row.names = FALSE, col.names = FALSE, quote = FALSE)
     write.table(examples_test, file = paste(getwd(), "/", class, "_test.csv", sep = ""), row.names = FALSE, col.names = FALSE, quote = FALSE)
     j <- j + 1
   }
 }
 
+#write libsvm-readable file
 obtain_libsvm_file <- function(data)
 {
   n_cols <- ncol(data)
@@ -156,7 +161,7 @@ obtain_libsvm_file <- function(data)
 #training commands
 write_train_sources_commands <- function(number_concepts, percent, rep)
 {
-  setwd(paste("C:/Users/Administrator/Desktop/imagenet/data/rep", rep, sep = ""))
+  setwd(paste("/imagenet/data/rep", rep, sep = ""))
   training_files <- list.files(pattern = "*._training.csv")
   
   training_commands <- data.frame(command = character(), stringsAsFactors = FALSE)
@@ -170,8 +175,8 @@ write_train_sources_commands <- function(number_concepts, percent, rep)
       #sources
       #if(exists_sample(rep, concept, percent))
       #{
-        data_dir <- ("C:/Users/Administrator/Desktop/imagenet/sources/data/")
-        sources_dir <- ("C:/Users/Administrator/Desktop/imagenet/sources/")
+        data_dir <- ("/imagenet/sources/data/")
+        sources_dir <- ("/imagenet/sources/")
         
         training_file <- paste(data_dir, "rep",rep, "/", concept, sep = "")
         model_file <- paste(sources_dir, "model/rep",rep, "/", gsub("_training.csv", "_training.csv.model", concept), sep = "")
@@ -183,21 +188,24 @@ write_train_sources_commands <- function(number_concepts, percent, rep)
     }
   }
   
-  setwd("C:/Users/Administrator/Desktop/imagenet/sources/")
+  setwd("/imagenet/sources/")
   write.table(training_commands, paste(getwd(), "/training_commands_all.txt", sep = ""), row.names = FALSE, col.names = FALSE, quote = FALSE)
 }
 
-
+#helper function
 exists_sample <- function(rep, name, percent)
 {
-  setwd(paste("C:/Users/Administrator/Desktop/synthetic_rbf/data/rep",rep,sep = ""))
+  setwd(paste("/synthetic_rbf/data/rep",rep,sep = ""))
   
   file.exists(paste("rbf", concept,"_training.csv",sep = ""))
 }
 
+
+#write commands for training with forward and then backward transfer (refinement)
+#these commands will be helpful for calling the .jar file
 train_forward_backward <- function(number_concepts, percent, rep)
 {
-  setwd("C:/Users/Administrator/Desktop/imagenet/sources")
+  setwd("/imagenet/sources")
   
   n_features <- 1000
   features <- ""; for(i in 1:n_features){ if(i != n_features) { features <- paste(features, i, "_", sep = "") } else { features <- paste(features, i, sep = "") } }
@@ -207,9 +215,9 @@ train_forward_backward <- function(number_concepts, percent, rep)
   balance_factor_forward <- 1
   balance_factor_backward <- 1
   
-  data_dir <- (paste("C:/Users/Administrator/Desktop/imagenet/sources/data/rep", rep, sep = ""))
-  model_dir <- (paste("C:/Users/Administrator/Desktop/imagenet/sources/model/rep", rep, sep = ""))
-  test_dir <- (paste("C:/Users/Administrator/Desktop/imagenet/test/rep", rep, sep = ""))
+  data_dir <- (paste("/imagenet/sources/data/rep", rep, sep = ""))
+  model_dir <- (paste("/imagenet/sources/model/rep", rep, sep = ""))
+  test_dir <- (paste("/imagenet/test/rep", rep, sep = ""))
   
   times <- floor(number_concepts / 2)
   
@@ -251,13 +259,14 @@ train_forward_backward <- function(number_concepts, percent, rep)
   predict_test_command(sources, model_dir, data_dir, test_dir, number_concepts, time, rep) 
 }
 
+#commands for copying files when no transfer forward has occurred (created copies of existing models not subject to refinement)
 write_copy_command <- function(model_dir, sources, target, number_concepts, time, rep)
 {
-  setwd(paste("C:/Users/Administrator/Desktop/imagenet/data/rep", rep, sep = ""))
+  setwd(paste("/imagenet/data/rep", rep, sep = ""))
   training_files <- list.files(pattern = "*._training.csv")
   training_files <- gsub("_training.csv", "", training_files)
   
-  setwd("C:/Users/Administrator/Desktop/imagenet/sources")
+  setwd("/imagenet/sources")
   
   for(i in 1:length(training_files))
   {
@@ -276,13 +285,14 @@ write_copy_command <- function(model_dir, sources, target, number_concepts, time
   }
 }
 
+#for deleting a particular file, if necessary
 write_delete_command <- function(model_dir, test_dir, target, number_concepts, time, rep)
 {
-  setwd(paste("C:/Users/Administrator/Desktop/imagenet/data/rep", rep, sep = ""))
+  setwd(paste("/imagenet/data/rep", rep, sep = ""))
   training_files <- list.files(pattern = "*._training.csv")
   training_files <- gsub("_training.csv", "", training_files)
   
-  setwd("C:/Users/Administrator/Desktop/imagenet/sources")
+  setwd("/imagenet/sources")
   
   for(i in 1:length(training_files))
   {
@@ -311,12 +321,12 @@ write_delete_command <- function(model_dir, test_dir, target, number_concepts, t
   }
 }
 
-
+#command for transferring forward
+#this will use the .jar file at https://github.com/nanarosebp/PhDProject/tree/master/AccGenSVM
 write_transfer_forward_command <- function(current_dir, model_dir, target, sources, time, n_features, features, balance_factor_forward, rep)
 {
   params <- paste("-s 0 -t 2 -K 0.30 ", " -M 500 -N ", n_features, " -F ", features, " -D ", "\"", current_dir, "\"", " -S ", "\"", model_dir, "\"", " -f ", sep = "")
-  #r_path <- "-Djava.library.path=/gpfs1m/apps/easybuild/RHEL6.3/westmere/software/R/3.4.0-gimkl-2017a/lib64/R/library/rJava/jri"
-  command <- paste("java -jar accgensvm_forward_imagenet.jar ", params, "\"", target, "\"", sep = "")
+  command <- paste("java -jar accgensvm.jar ", params, "\"", target, "\"", sep = "")
 
   target_replace <- gsub(".csv", "", target)  
   command <- paste(command, " -y ", "\"", target_replace, "_t", time, ".csv.model", "\"", " -a ", "\"", target_replace, "_t", time, ".txt", "\"", sep = "")
@@ -326,10 +336,12 @@ write_transfer_forward_command <- function(current_dir, model_dir, target, sourc
     command <- paste(command, " -H ", "\"", sources[i], "\"", sep = "")
   }
   
-  setwd("C:/Users/Administrator/Desktop/imagenet/sources")
+  setwd("/imagenet/sources")
   write.table(command, paste(getwd(), "/forwardbackward_commands_all_imagenet_rep", rep, ".cmd", sep = ""), row.names = FALSE, col.names = FALSE, quote = FALSE, append = TRUE)
 }
 
+#writes single transfer backward command
+#this will use the .jar file at https://github.com/nanarosebp/PhDProject/tree/master/HRSVM
 write_transfer_backward_command <- function(model_dir, test_dir, target, sources, time, balance_factor_backward, rep)
 {
   models <- ""
@@ -340,9 +352,9 @@ write_transfer_backward_command <- function(model_dir, test_dir, target, sources
     test <- gsub("training", "test", source_replace)
     
     params <- paste("-s 1 -t 2 -G 0.01 -B ", balance_factor_backward, sep = "")
-    command <- paste("java -jar accgensvm_backward_imagenet.jar ", params, " -H ", "\"", model_dir, "/", target, "\"", " -S ", "\"", model_dir, "/", source, "\"", " -M ", "\"", model_dir, "/", source_replace, "_t", time, ".csv.model", "\"", " > ", "\"", model_dir, "/", source_replace, "_t", time, ".txt", "\"", sep = "")
+    command <- paste("java -jar hrsvm.jar ", params, " -H ", "\"", model_dir, "/", target, "\"", " -S ", "\"", model_dir, "/", source, "\"", " -M ", "\"", model_dir, "/", source_replace, "_t", time, ".csv.model", "\"", " > ", "\"", model_dir, "/", source_replace, "_t", time, ".txt", "\"", sep = "")
     
-    setwd("C:/Users/Administrator/Desktop/imagenet/sources")
+    setwd("/imagenet/sources")
     write.table(command, paste(getwd(), "/forwardbackward_commands_all_imagenet_rep", rep, ".cmd", sep = ""), row.names = FALSE, col.names = FALSE, quote = FALSE, append = TRUE)
     
     model_name <- paste(source_replace, "_t", time, ".csv.model", sep = "")
@@ -360,9 +372,10 @@ write_transfer_backward_command <- function(model_dir, test_dir, target, sources
   models
 }
 
+#write a predict command to obtain performance right after each timestep of the sequence, so that later this can be evaluated
 predict_test_command <- function(sources, model_dir, data_dir, test_dir, number_concepts, time, rep)
 {
-  setwd(paste("C:/Users/Administrator/Desktop/imagenet/data/rep", rep, sep = ""))
+  setwd(paste("/imagenet/data/rep", rep, sep = ""))
   training_files <- list.files(pattern = "*._training.csv")
   training_files <- gsub("_training.csv", "", training_files)
   
@@ -393,6 +406,6 @@ predict_test_command <- function(sources, model_dir, data_dir, test_dir, number_
     #}
   }
   
-  setwd("C:/Users/Administrator/Desktop/imagenet/sources")
+  setwd("/imagenet/sources")
   write.table(predict_commands, paste(getwd(), "/forwardbackward_commands_all_imagenet_rep", rep, ".cmd", sep = ""), row.names = FALSE, col.names = FALSE, quote = FALSE, append = TRUE)
 }
